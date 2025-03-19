@@ -8,6 +8,7 @@ export default function LeafletMaps() {
     { title: "Store Locator", path: "/apps/leaflet-maps/examples/store-locator" },
     { title: "Delivery Tracker", path: "/apps/leaflet-maps/examples/delivery-tracker" },
     { title: "Address Autocomplete", path: "/apps/leaflet-maps/examples/address-autocomplete" },
+    { title: "Pickup & Drop-off Points", path: "/apps/leaflet-maps/examples/pickup-dropoff" },
     // Add more examples later, e.g., { title: "Markers", path: "/apps/leaflet-maps/examples/markers" }
   ];
 

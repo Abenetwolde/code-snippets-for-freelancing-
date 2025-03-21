@@ -6,6 +6,7 @@ export default function SupabaseExamples() {
     { title: "Authentication", path: "/apps/supabase-examples/examples/authentication" },
     { title: "Role-Based Access", path: "/apps/supabase-examples/examples/role-based-access" },
     { title: "Storage", path: "/apps/supabase-examples/examples/storage" },
+    { title: "Realtime Chat", path: "/apps/supabase-examples/examples/realtime-chat" },
   ];
 
   return (

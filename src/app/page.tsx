@@ -6,6 +6,7 @@ export default function Home() {
   const miniApps = [
     { title: "Leaflet Maps", path: "/apps/leaflet-maps" },
     { title: "Supabase Examples", path: "/apps/supabase-examples" },
+    { title: "Firebase Examples", path: "/apps/firebase" },
     // Add more mini-apps later, e.g., { title: "Charts", path: "/apps/charts" }
   ];
 

@@ -6,6 +6,7 @@ import { auth } from "@/app/lib/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import SMSForm from "./components/SMSForm";
 import SMSStatus from "./components/SMSStatus";
+import axios from "axios";
 
 export default function AfroMessagePage() {
   const [user, setUser] = useState<any>(null);

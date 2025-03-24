@@ -8,7 +8,7 @@ export default function LeafletMaps() {
     { title: "Sign in/Firestore/Storage", path: "/apps/firebase/auth/signin" },
     { title: "CRUD", path: "/apps/firebase/crud" },
     { title: "Real-Time Database/chat app", path: "/apps/firebase/realtime-chat" },
-   
+    { title: "firebase-cloud-messaging", path: "/apps/firebase/firebase-cloud-messaging" },
     // Add more examples later, e.g., { title: "Markers", path: "/apps/leaflet-maps/examples/markers" }
   ];
 

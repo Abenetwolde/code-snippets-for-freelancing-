@@ -20,41 +20,50 @@ export default function AfroMessagePage() {
   }, []);
 
   const handleSendSMS = async (to: string, message: string) => {
-    const apiKey = process.env.NEXT_PUBLIC_AFROMESSAGE_API_KEY;
-    const from = process.env.NEXT_PUBLIC_AFROMESSAGE_IDENTIFIER_ID;
-    const sender = process.env.NEXT_PUBLIC_AFROMESSAGE_SENDER_NAME;
-    const callback = process.env.NEXT_PUBLIC_AFROMESSAGE_CALLBACK_URL || "https://fir-practice-7c6ff.web.app/apps/afromessage";
-
-    const url = new URL("https://api.afromessage.com/api/send");
-    url.searchParams.append("from", from || "");
-    url.searchParams.append("sender", sender || "");
-    url.searchParams.append("to", to);
-    url.searchParams.append("message", message);
-    url.searchParams.append("callback", callback);
-
-    const response = await fetch(url.toString(), {
-      method: "GET",
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-      },
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(errorText || "Failed to send SMS");
+    try {
+      const apiKey = process.env.NEXT_PUBLIC_AFROMESSAGE_API_KEY;
+      const from = process.env.NEXT_PUBLIC_AFROMESSAGE_IDENTIFIER_ID;
+      const sender = process.env.NEXT_PUBLIC_AFROMESSAGE_SENDER_NAME;
+      const callback =
+        process.env.NEXT_PUBLIC_AFROMESSAGE_CALLBACK_URL ||
+        "https://fir-practice-7c6ff.web.app/apps/afromessage";
+  
+      const url = "https://api.afromessage.com/api/send";
+  
+      const params = new URLSearchParams({
+        from: from || "",
+        sender: sender || "",
+        to,
+        message,
+        callback,
+      });
+  
+      const response = await axios.get(url, {
+        params,
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      });
+  
+      if (response.data.acknowledge !== "success") {
+        throw new Error(response.data.error || "Failed to send SMS");
+      }
+  
+      const result = {
+        messageId: response.data.message_id || "unknown",
+        status: response.data.status || "Sent",
+      };
+  
+      setSmsStatus(result);
+  
+      // Simulate callback status update (since we don’t have a real callback server here)
+      setTimeout(() => setSmsStatus({ ...result, status: "Delivered" }), 3000);
+  
+      return result;
+    } catch (error) {
+      console.error("Error sending SMS:", error);
+      setSmsStatus({ error: "Failed to send SMS" });
     }
-
-    const data = await response.json();
-    const result = {
-      messageId: data.message_id || "unknown",
-      status: data.status || "Sent",
-    };
-
-    setSmsStatus(result);
-    // Simulate callback status update (since we don’t have a real callback server here)
-    setTimeout(() => setSmsStatus({ ...result, status: "Delivered" }), 3000);
-
-    return result;
   };
 
   const handleLogout = async () => {

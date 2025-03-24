@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
+    "axios": "^1.8.4",
     "better-auth": "^1.2.4",
     "firebase": "^11.5.0",
     "leaflet": "^1.9.4",

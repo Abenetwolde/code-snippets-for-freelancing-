@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { useState } from "react";
 
 interface SMSFormProps {
@@ -21,8 +22,10 @@ export default function SMSForm({ onSend }: SMSFormProps) {
 
     setSending(true);
     try {
-      const result = await onSend(to, message);
-      if (result.error) {
+        const result = await axios.post("/api/send-sms", { to, message });
+        // setSmsStatus(response.data);
+    //   const result = await onSend(to, message);
+      if (result?.error) {
         setError(result.error);
       } else {
         setTo("");
@@ -63,7 +66,7 @@ export default function SMSForm({ onSend }: SMSFormProps) {
           required
         />
       </div>
-      {error && <p className="text-red-500">{error}</p>}
+      {/* {error && <p className="text-red-500">{error}</p>} */}
       <button
         type="submit"
         disabled={sending}
